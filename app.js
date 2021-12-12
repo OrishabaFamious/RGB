@@ -3,7 +3,7 @@ const gElement = document.getElementById("g");
 const bElement = document.getElementById("b");
 
 const levels = Array.from(document.getElementsByClassName("mode"));
-
+const squares = Array.from(document.getElementsByClassName("square"));
 let gamelevel = levels.find((level) => {
     const classList = Array.from(level.classList);
     return classList.includes("selected");
@@ -18,3 +18,20 @@ levels.forEach(level =>{
         gamelevel = this.innerHTML;
     });
 }); 
+
+//make the squares have a background color//
+const startButton = document.getElementById("reset");
+
+startButton.addEventListener("click", function(){
+    for (let i = 0; i< squares.length; i=i + 1){
+        const red = Math.floor(Math.random()* 256);
+        const green = Math.floor(Math.random()* 256);
+        const blue = Math.floor(Math.random()* 256);
+
+        const rgbString = "rgb(" + red + "," +green + "," + blue + ")";
+
+        const square = squares[i];
+        square.style.backgroundColor = rgbString;
+    }
+});
+
