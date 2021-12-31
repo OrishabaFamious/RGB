@@ -4,11 +4,16 @@ const bElement = document.getElementById("b");
 const colorDisplayElement = document.getElementById("color-display");
 
 const levels = Array.from(document.getElementsByClassName("mode"));
-const squares = Array.from(document.getElementsByClassName("square"));
+
+//this is where i stopped.
+let gameLevel = selectedLevelButton.innerHTML;
+
+const squares = getSquares();
 let gamelevel = levels.find((level) => {
     const classList = Array.from(level.classList);
     return classList.includes("selected");
 }).innerHTML;
+
 
 
 levels.forEach(level =>{
@@ -17,8 +22,33 @@ levels.forEach(level =>{
         this.classList.add("selected");
 
         gamelevel = this.innerHTML;
+        setTitlesAccordingToLevel(gamelevel)
     });
 }); 
+
+function getSquares(){
+    const allSquares = Array.from(document.getElementsByClassName("square"));
+
+    if (gamelevel == "Easy") {
+        return allSquares.slice(0, 3)
+    } else {
+        return allSquares
+    }
+}
+
+function setTitlesAccordingToLevel(currentGameLevel){
+    const allSquares = Array.from(document.getElementsByClassName("square"));
+    if (currentGameLevel =="Easy") {
+        //set three squares on screen
+        const firstThreeSquares = squares.slice(0, 3)
+        const lastThreeSquares = squares.slice(3, 6)
+
+        lastThreeSquares.forEach(sq => sq.classList.add("hidden"))
+    }else if (currentGameLevel == "Hard"){
+        allSquares.forEach(sq => sq.classList.remove("hidden"))
+        //set six squares on screen
+    }
+}
 
 //make the squares have a background color//
 const startButton = document.getElementById("reset");
